@@ -1,0 +1,18 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+<script src="http://code.jquery.com/jquery-1.7.2.js"></script>
+<script>
+//Get the data using ajax
+$.get(
+    "getinfo.php/1", {},
+    function(data) { 
+  $('.InfoDiv').html(data); }
+);
+</script>
+</head>
+<body>
+<h1><font face="verdana" color="green">Welcome</font></h1>
+<center><div class="InfoDiv"></div></center>
+</body>
+</html>
