@@ -41,7 +41,6 @@ class common{
 if(isset($_POST['submit'])) {
  $start_range   = trim($_POST["start_range"]);
  $end_range 	= trim($_POST["end_range"]);
- require_once "library/common.php";
  $comObj = new common($start_range,$end_range);
  $result=$comObj->test1Display(); 
 }
