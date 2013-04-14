@@ -1,0 +1,117 @@
+1. Error on importing HDB table in data.sql
+Suggestions: Error no. 150 means a foreign key constraint failure.In order to use foreign keys, the tables must both be InnoDB. 
+
+Correction: So change parent table ("Property") engine type "MyISAM" to "InnoDB" on data.sql line 10
+
+------------------------------------------------------
+
+2. Error: #1075 - Incorrect table definition; there can be only one auto column and it must be defined as a key 
+
+Correction : on data.sql line 21 change
+"ID BIGINT AUTO_INCREMENT,"
+to
+"ID BIGINT AUTO_INCREMENT PRIMARY KEY,"
+
+-------------------------------------------------------
+
+3. Error : #1005 - Can't create table 'condo' (errno: 150) 
+
+Suggestions: Correct the data types and make sure foreign key and referenced column should have same data types, length, attributes, default values, collation. and then this problem is solved. 
+
+Correction : on line 22 change
+"PID INT NOT NULL,"
+to
+"PID BIGINT NOT NULL,"
+---------------------------------------------------------
+4. Parse error: syntax error, unexpected ')' in D:\xampp\htdocs\study\singtest\task2\getinfo.php on line 4
+
+Correction: Remove the unwanted extra closing bracket ")" from the line 4, Please see the below corrected line of code
+$ArrayURL = split('/', $_SERVER[REQUEST_URI]);
+
+----------------------------------------------------------
+5. Fatal error: Can't use function return value in write context in D:\xampp\htdocs\study\singtest\task2\getinfo.php on line 8
+
+Correction : on line 8 change the line of code from 
+if (is_object($data) = true) to if (is_object($data) == true)
+
+--------------------------------------------------------------------
+6.Fatal error: Class 'dataObj' not found in D:\xampp\htdocs\study\singtest\task2\getinfo.php on line 6
+
+Correction: The original class name is baseObj,so change the class name "dataObj" to "baseObj" in getinfo.php line 6
+
+---------------------------------------------------------------------
+7. Add "" (double quote) under $_SERVER On getinfo.php line 4
+Correction: change
+$ArrayURL = split('/', $_SERVER[REQUEST_URI]);
+to
+$ArrayURL = split('/', $_SERVER["REQUEST_URI"]);
+
+----------------------------------------------------------------------
+8. On getinfo.php line 4 function split deprecated as of PHP verion 5.3.0
+Correction: I advise to use explode or preg_split function instead since the split function has been deprecated.
+-----------------------------------------------------------------------
+9. 404 not found. Get /getinfo/111 not found on test.html line 10
+Correction: change
+ "/getinfo/111", {},
+to
+ "getinfo.php/111", {},
+ 
+ if you are using htaccess we need keep this line to "getinfo/111", {}, 
+ 
+------------------------------------------------------------------------ 
+10.Fatal error: Access level to propertyData::$table must be public (as in class baseObj) in D:\xampp\htdocs\study\singtest\task2\data.php on line 45
+
+Suggestion : The base class which is having getAll($id) method to all childs, but doesn't contain any property. The child is inheriting these methods, which should be used to access the child's properties. If the child's property is private, it fails without error.
+
+Correction : So I have modified all the table declaration variable access modifier to public and also removed the base class table declaration.
+
+1.Change  private $table = 'property';  to  public $table = 'property';
+
+2.comment the line 4 on data.php, private $table = null;  
+--------------------------------------------------------------------------
+11.I have created the object for child class instead of parent class
+
+Changes on line 6 in getinfo.php
+$data = new propertyData();
+--------------------------------------------------------------------------
+12.Applied double quotes on line 8 and 9 in getinfo.php
+
+change from
+
+if (is_object($data) = true) $status = '200 OK';
+$status_header = 'HTTP/1.1 $status';
+
+to 
+
+if (is_object($data) == true) $status = "200 OK";
+$status_header = "HTTP/1.1 $status";
+-----------------------------------------------------------------------
+13.The last line for getinfo.php we need to change return to echo statement
+because this is not a function to return the value. we need to print the value.
+
+Change the below line 
+
+return json_encode( $data->getAll($id) );  
+
+to
+
+echo json_encode( $data->getAll($id) );
+
+------------------------------------------------------------------------
+14.In test.html the below lines of code is not required
+
+<DIV ID="fb-root"></DIV>
+<SCRIPT></SCRIPT>
+
+I have removed the above lines.
+------------------------------------------------------------------------
+15.In test.html page on line 6, No need for this type of comments for single line text.So I have changed below line 
+
+<!--//
+Get the data using ajax
+//-->
+
+to
+
+//Get the data using ajax
+------------------------------------------------------------------------
