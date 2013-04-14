@@ -48,7 +48,6 @@ return $msg; //return the result
 //End class
 
 if(isset($_POST['submit'])) {
-  require_once "library/common.php";
   $start_range = trim($_POST["start_range"]);
   $end_range = trim($_POST["end_range"]);
   $comObj = new common($start_range,$end_range);
